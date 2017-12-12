@@ -3,8 +3,8 @@
 Ansible playbook to configure a (debian based) system as it should be to make me feel at home!!
 
 ## How to use
-1. Install ansible: sudo pip install ansible
-2. Run the playbook: ansible-playbook -i inventary -l local --connection=local -K  custom-linux.yml
+1. Install ansible: `sudo pip install ansible`
+2. Run the playbook: `ansible-playbook -i inventary -l local --connection=local -K  custom-linux.yml`
 
 ## Work in progress
 1. Include mechanism (tags? different localhost hosts for each role?) to configure just desktop or shell.
