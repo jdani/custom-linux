@@ -16,3 +16,85 @@
   become: yes
   with_items: "{{ shell_pip_packages }}"
 
+
+- name: Install vim pathogen
+  # https://github.com/tpope/vim-pathogen#installation
+  block:
+
+    - name: Create needed files for pathogen
+      file:
+        # mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+        path: "{{ item }}"
+        state: "directory"
+        # create: true
+      with_items:
+        - "~/.vim/autoload"
+        - "~/.vim/bundle"
+
+    - name: Download pathogen
+      shell: "curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim"
+
+    - name: Copy .vimrc
+      copy:
+        src: ".vimrc"
+        dest: "~/.vimrc"
+
+    - name: Install vim plugins
+      git:
+        repo: "{{ item }}"
+        dest: "~/.vim/bundle/{{ item|basename|regex_replace('.git$','') }}/"
+        clone: "yes"
+        accept_hostkey: "yes"
+      with_items: "{{ vim_plugins_repos }}"
+
+
+- name: Install vim file type plugins
+  copy:
+    src: "{{ item }}"
+    dest: "~/.vim/ftplugin/{{ item|basename }}"
+  with_fileglob: "ftplugin/*"
+
+
+- name: Install tmux plugin manager tpm
+  block:
+
+    - name: Cloning tpm repo
+      git:
+        repo: "git@github.com:tmux-plugins/tpm.git"
+        dest: "~/.tmux/plugins/tpm"
+        clone: yes
+    
+    - name: Copy .tmux.conf
+      copy:
+        src: ".tmux.conf"
+        dest: "~/.tmux.conf"
+
+- name: Copy .bashrc
+  copy:
+    src: ".bashrc"
+    dest: "~/.bashrc"
+
+
+- name: Install fonts for powerline
+  block:
+
+    - name: Create needed dirs
+      file:
+        path: "{{ item }}"
+        state: "directory"
+      with_items:
+        - "~/.local/share/fonts"
+        - "~/.config/fontconfig/conf.d"
+
+    - name: Download fonts
+      get_url:
+        url: "https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf"
+        dest: "~/.local/share/fonts/PowerlineSymbols.otf"
+
+    - name: Download config file
+      get_url:
+        url: "https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf"
+        dest: "~/.config/fontconfig/conf.d/10-powerline-symbols.conf"
+
+    - name: Update font cache
+      shell: "fc-cache -vf ~/.local/share/fonts/"
