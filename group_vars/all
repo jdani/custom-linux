@@ -6,12 +6,21 @@ shell_apt_packages:
   - docker
   - virtualbox 
   - python-pip
+  - curl
+  - vagrant
+  - flake8
 
 shell_pip_packages:
   - ansible
+  - powerline-shell
 
 desktop_apt_packages:
+  - xserver-xorg-input-synaptics
   - google-chrome-stable
   - libreoffice
   - spotify-client
   - gimp
+
+vim_plugins_repos:
+  - git://github.com/tpope/vim-sensible.git
+  - git@github.com:w0rp/ale.git
