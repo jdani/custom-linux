@@ -1,0 +1,15 @@
+- name: Apply custom config to linux system
+  hosts: all
+  remote_user: jdani
+
+  roles:
+  - shell
+  - desktop
+
+
+  tasks:
+  - name: "Manual steps info"
+    debug:
+      msg: |
+           Don't forget to:
+           Manual config ICA Client: /opt/Citrix/ICAClient/util/configmgr

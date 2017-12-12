@@ -1,0 +1,17 @@
+---
+shell_apt_packages:
+  - gdebi
+  - tmux
+  - vim
+  - docker
+  - virtualbox 
+  - python-pip
+
+shell_pip_packages:
+  - ansible
+
+desktop_apt_packages:
+  - google-chrome-stable
+  - libreoffice
+  - spotify-client
+  - gimp
