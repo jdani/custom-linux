@@ -3,7 +3,7 @@ shell_apt_packages:
   - gdebi
   - tmux
   - vim
-  - docker
+  - docker.io
   - virtualbox 
   - python-pip
   - curl
