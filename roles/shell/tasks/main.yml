@@ -9,6 +9,8 @@
     cache_valid_time: 86400 
   become: yes
   with_items: "{{ shell_apt_packages }}"
+  tags:
+    - shell_apt
 
 - name: Install pip packages
   pip:

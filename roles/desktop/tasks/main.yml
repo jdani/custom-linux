@@ -39,6 +39,8 @@
     state: "installed"
     update_cache: yes
   with_items: "{{ desktop_apt_packages }}"
+  tags:
+    - desktop_apt
 
 
 - name: Download and install Skype
