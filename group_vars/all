@@ -20,6 +20,7 @@ desktop_apt_packages:
   - libreoffice
   - spotify-client
   - gimp
+  - xdotool
 
 vim_plugins_repos:
   - git://github.com/tpope/vim-sensible.git
