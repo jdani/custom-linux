@@ -17,6 +17,27 @@
   with_items: "{{ shell_pip_packages }}"
 
 
+- name: Create docker group and add current user to docker group
+  block:
+    - name: Create docker group
+      become: yes
+      group:
+        name: "docker"
+        state: "present"
+
+    - name: Register current username
+      shell: whoami
+      register: current_username
+
+
+    - name: Add current user to docker group
+      become: yes
+      user:
+        name: "{{ current_username.stdout }}"
+        groups: "docker"
+        append: "yes"
+
+
 - name: Install vim pathogen
   # https://github.com/tpope/vim-pathogen#installation
   block:
