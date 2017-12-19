@@ -9,6 +9,7 @@ shell_apt_packages:
   - curl
   - vagrant
   - flake8
+  - atool
 
 shell_pip_packages:
   - ansible
