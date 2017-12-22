@@ -11,6 +11,7 @@ shell_apt_packages:
   - flake8
   - atool
   - tlp
+  - acpi-call-dkms
 
 shell_pip_packages:
   - ansible
