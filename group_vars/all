@@ -17,6 +17,7 @@ shell_pip_packages:
   - ansible
   - powerline-shell
   - backintime-gnome
+  - subliminal
 
 desktop_apt_packages:
   - xserver-xorg-input-synaptics
