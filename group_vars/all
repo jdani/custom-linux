@@ -12,11 +12,11 @@ shell_apt_packages:
   - atool
   - tlp
   - acpi-call-dkms
+  - exuberant-ctags
 
 shell_pip_packages:
   - ansible
   - powerline-shell
-  - backintime-gnome
   - subliminal
 
 desktop_apt_packages:
@@ -26,7 +26,10 @@ desktop_apt_packages:
   - spotify-client
   - gimp
   - xdotool
+  - backintime-gnome
 
 vim_plugins_repos:
   - git://github.com/tpope/vim-sensible.git
   - git@github.com:w0rp/ale.git
+  - git@github.com:ajh17/VimCompletesMe.git
+  - git@github.com:ludovicchabant/vim-gutentags.git
