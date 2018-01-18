@@ -121,3 +121,11 @@
 
     - name: Update font cache
       shell: "fc-cache -vf ~/.local/share/fonts/"
+
+- name: Fix VimCompletesMe support for Python3
+  become: yes
+  replace:
+    path: /usr/share/vim/vim80/ftplugin/python.vim
+    regexp: 'setlocal omnifunc=pythoncomplete#Complete'
+    replace: 'setlocal omnifunc=python3complete#Complete'
+    backup: yes
