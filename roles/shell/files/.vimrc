@@ -31,5 +31,8 @@ set cursorline
 " Highlight cursor column
 set cursorcolumn
 
+" Highlight every search match
+set hlsearch
+
 " Pathogen bundle
 execute pathogen#infect()
