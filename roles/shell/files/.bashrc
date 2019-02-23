@@ -1,8 +1,9 @@
 # Start tmux if not started
-if [[ ! $TERM =~ screen ]]; then
-    exec tmux
+# [[ $TERM != "screen" ]] && [[ $TERM != "dumb" ]] &&  exec tmux
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
 fi
-
+ 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
