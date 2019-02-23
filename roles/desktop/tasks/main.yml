@@ -1,14 +1,15 @@
 ---
 # tasks file for desktop
 
-- name: Add Spotify epo
+- name: Add Spotify repo
   become: yes
   block:
 
    - name: Add Spotify repo key
      apt_key:
        keyserver: "keyserver.ubuntu.com"
-       id: "0DF731E45CE24F27EEEB1450EFDC8610341D9410"
+       id: "931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90"
+       state: present
 
    - name: Adding Spotify repo 
      apt_repository:
@@ -80,7 +81,7 @@
 
         - name: "Download ICA Client package"
           #shell: "wget https://downloads.citrix.com/10837/icaclient_13.2.0.322243_amd64.deb?__gda__=1513034520_164fbc79677546ef2381f5c8ca9b2509 -O /tmp/ica.deb"
-          shell: "wget https://downloads.citrix.com/14076/icaclient_13.8.0.10299729_amd64.deb?__gda__=1513036518_425183023a12ce3b1334d46a489d1d01 -O /tmp/ica.deb"
+          shell: "wget https://downloads.citrix.com/14822/icaclient_13.10.0.20_amd64.deb?__gda__=1550953789_c07fc42964ea7b7551cdfe63baea0b01 -O /tmp/ica.deb"
 
         - name: "Install ICA Client package"
           shell: "gdebi --n /tmp/ica.deb"
