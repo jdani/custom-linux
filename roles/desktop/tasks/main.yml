@@ -16,22 +16,6 @@
 
 
 
-
-
-- name: Add Google Chrome Repo
-  become: yes
-  block:
-
-    - shell: "wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -"
-      changed_when: false
-
-    - lineinfile:
-        path: "/etc/apt/sources.list.d/google.list"
-        line: "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
-        state: "present"
-        create: "yes"
-
-
 - name: Install apt packages
   become: yes
   apt:
