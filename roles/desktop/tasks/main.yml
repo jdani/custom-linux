@@ -5,13 +5,15 @@
   become: yes
   block:
 
-    - apt_key:
-      keyserver: "keyserver.ubuntu.com"
-      id: "0DF731E45CE24F27EEEB1450EFDC8610341D9410"
+   - name: Add Spotify repo key
+     apt_key:
+       keyserver: "keyserver.ubuntu.com"
+       id: "0DF731E45CE24F27EEEB1450EFDC8610341D9410"
 
-    - apt_repository:
-      repo: "deb http://repository.spotify.com stable non-free"
-      state: present
+   - name: Adding Spotify repo 
+     apt_repository:
+       repo: "deb http://repository.spotify.com stable non-free"
+       state: present
 
 
 
