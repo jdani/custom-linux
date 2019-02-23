@@ -71,6 +71,11 @@
       with_items: "{{ vim_plugins_repos }}"
 
 
+- name: Needed dir for vim ftplugin
+  file:
+    path: "~/.vim/ftplugin"
+    state: directory
+
 - name: Install vim file type plugins
   copy:
     src: "{{ item }}"
