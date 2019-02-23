@@ -29,7 +29,7 @@ desktop_apt_packages:
   - backintime-gnome
 
 vim_plugins_repos:
-  - git://github.com/tpope/vim-sensible.git
-  - git@github.com:w0rp/ale.git
-  - git@github.com:ajh17/VimCompletesMe.git
-  - git@github.com:ludovicchabant/vim-gutentags.git
+  - https://github.com/tpope/vim-sensible.git
+  - https://github.com/w0rp/ale.git
+  - https://github.com/ajh17/VimCompletesMe.git
+  - https://github.com/ludovicchabant/vim-gutentags.git
