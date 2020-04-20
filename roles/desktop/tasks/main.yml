@@ -1,68 +1,31 @@
 ---
 # tasks file for desktop
 
-- name: Add Spotify repo
+
+- name: Install snap packages
   become: yes
-  block:
-
-   - name: Add Spotify repo key
-     apt_key:
-       keyserver: "keyserver.ubuntu.com"
-       id: "931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90"
-       state: present
-
-   - name: Adding Spotify repo 
-     apt_repository:
-       repo: "deb http://repository.spotify.com stable non-free"
-       state: present
-
+  snap:
+    name: "{{ desktop_snap_packages }}"
+    state: "present"
+    classic: yes
+  tags:
+    - desktop_apt
 
 
 - name: Install apt packages
   become: yes
   apt:
-    name: "{{ item }}"
-    state: "installed"
+    name: "{{ desktop_apt_packages }}"
+    state: "latest"
     update_cache: yes
-  with_items: "{{ desktop_apt_packages }}"
   tags:
     - desktop_apt
 
 
-- name: Download and install Skype
-  block:
- 
-    - name: Check if Skype is installed
-      command: "dpkg-query -l skypeforlinux"
-      ignore_errors: true
-      changed_when: false
-      register: deb_check
-
-
-    - block:
-
-        - command: "wget https://repo.skype.com/latest/skypeforlinux-64.deb -O /tmp/skype.deb"
-          changed_when: false
-
-
-        - shell: "gdebi --n /tmp/skype.deb"
-          become: yes
-
-        - file:
-            path: "/tmp/skype.deb"
-            state: "absent"
-          failed_when: false
-          ignore_errors: true
-          changed_when: false
-
-      when: deb_check|failed
- 
-
-
-- name: Install ICA Client
+- name: Install ICA Workspace (Full Package)
   block:
 
-    - name: Check if Skype is installed
+    - name: Check if icaclient is installed
       command: "dpkg-query -l icaclient"
       ignore_errors: true
       changed_when: false
@@ -79,18 +42,11 @@
           shell: "apt update"
           become: yes
 
-        - name: "Download ICA Client package"
-          #shell: "wget https://downloads.citrix.com/10837/icaclient_13.2.0.322243_amd64.deb?__gda__=1513034520_164fbc79677546ef2381f5c8ca9b2509 -O /tmp/ica.deb"
-          shell: "wget https://downloads.citrix.com/14822/icaclient_13.10.0.20_amd64.deb?__gda__=1550953789_c07fc42964ea7b7551cdfe63baea0b01 -O /tmp/ica.deb"
+        - name: "Download ICA Workspace (Full Package)"
+          shell: "wget https://downloads.citrix.com/17780/icaclient_20.04.0.21_amd64.deb?__gda__=1587383602_058ee3cff80139a5f94a99e2f5726c93 -O /tmp/ica.deb"
 
         - name: "Install ICA Client package"
           shell: "gdebi --n /tmp/ica.deb"
-          become: yes
-
-        - shell: "ln -s /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts/"
-          become: yes
-
-        - shell: "c_rehash /opt/Citrix/ICAClient/keystore/cacerts/"
           become: yes
 
         - shell: "xdg-mime default wfica.desktop application/x-ica"
@@ -102,7 +58,7 @@
           ignore_errors: true
           changed_when: false
 
-      when: deb_check|failed
+      when: deb_check is failed
 
 - name: No image as wallpaper
   include_tasks: change_key_in_all_schemas.yml

@@ -3,7 +3,7 @@
   remote_user: jdani
 
   roles:
-  - shell
+  # - shell
   - desktop
 
 

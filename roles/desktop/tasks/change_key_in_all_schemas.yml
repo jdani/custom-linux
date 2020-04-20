@@ -4,5 +4,6 @@
 # value: value to be set
 - shell: 'for schema in $( gsettings list-schemas ); do [ $( gsettings list-keys $schema | grep {{ filter_key }} | wc -l ) -gt 0 ] && gsettings set $schema {{ item }} "{{ value }}"; done'
   register: gsettings
-  failed_when: gsettings|failed and 'No such key' not in gsettings.stderr and gsettings.stderr
+  failed_when: gsettings is failed and 'No such key' not in gsettings.stderr and gsettings.stderr
   with_items: "{{ keys  }}"
+  ignore_errors: true

@@ -5,7 +5,7 @@ shell_apt_packages:
   - vim
   - docker.io
   - virtualbox 
-  - python-pip
+  - python3-pip
   - curl
   - vagrant
   - flake8
@@ -21,12 +21,15 @@ shell_pip_packages:
 
 desktop_apt_packages:
   - xserver-xorg-input-synaptics
-  - google-chrome-stable
   - libreoffice
-  - spotify-client
   - gimp
   - xdotool
-  - backintime-gnome
+  - backintime-qt
+
+desktop_snap_packages:
+  - spotify
+  - chromium
+  - skype
 
 vim_plugins_repos:
   - https://github.com/tpope/vim-sensible.git

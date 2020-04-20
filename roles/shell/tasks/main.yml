@@ -3,20 +3,18 @@
 
 - name: Install apt packages
   apt:
-    name: "{{ item }}"
-    state: "installed"
+    name: "{{ shell_apt_packages }}"
+    state: "latest"
     update_cache: yes
     cache_valid_time: 86400 
   become: yes
-  with_items: "{{ shell_apt_packages }}"
   tags:
     - shell_apt
 
 - name: Install pip packages
   pip:
-    name: "{{ item }}"
+    name: "{{ shell_pip_packages }}"
   become: yes
-  with_items: "{{ shell_pip_packages }}"
 
 
 - name: Create docker group and add current user to docker group
@@ -118,19 +116,17 @@
       get_url:
         url: "https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf"
         dest: "~/.local/share/fonts/PowerlineSymbols.otf"
+      retries: 5
+      delay: 1
 
     - name: Download config file
       get_url:
         url: "https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf"
         dest: "~/.config/fontconfig/conf.d/10-powerline-symbols.conf"
+      retries: 5
+      delay: 1
 
     - name: Update font cache
       shell: "fc-cache -vf ~/.local/share/fonts/"
 
-- name: Fix VimCompletesMe support for Python3
-  become: yes
-  replace:
-    path: /usr/share/vim/vim80/ftplugin/python.vim
-    regexp: 'setlocal omnifunc=pythoncomplete#Complete'
-    replace: 'setlocal omnifunc=python3complete#Complete'
-    backup: yes
+
